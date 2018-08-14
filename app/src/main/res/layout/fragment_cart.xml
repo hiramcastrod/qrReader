@@ -1,15 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.design.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".fragments.CartFragment">
+    tools:context=".fragments.CartFragment"
+    android:background="@color/lightPrimaryColor"
+    >
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
-        android:gravity="center"
+    <android.support.v7.widget.RecyclerView
+        android:paddingTop="10dp"
+        android:id="@+id/recyclerview_cart"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="Cart Fragment" />
+        tools:listitem="@layout/article_view_holder"
+        />
 
-</FrameLayout>
+</android.support.design.widget.CoordinatorLayout>
