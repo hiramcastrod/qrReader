@@ -24,7 +24,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".activities.NewArticleActivity"></activity>
+        <activity android:name=".activities.NewArticleActivity" />
+        <activity android:name=".activities.DetailsActivity"
+            android:theme="@style/AppTheme.CustomTheme"
+            />
     </application>
 
 </manifest>

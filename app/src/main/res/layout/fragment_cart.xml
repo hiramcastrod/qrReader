@@ -7,6 +7,10 @@
     tools:context=".fragments.CartFragment"
     android:background="@color/lightPrimaryColor"
     >
+    <android.support.v4.widget.SwipeRefreshLayout
+        android:id="@+id/swipeRefreshLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
     <android.support.v7.widget.RecyclerView
         android:paddingTop="10dp"
@@ -15,5 +19,5 @@
         android:layout_height="match_parent"
         tools:listitem="@layout/article_view_holder"
         />
-
+    </android.support.v4.widget.SwipeRefreshLayout>
 </android.support.design.widget.CoordinatorLayout>

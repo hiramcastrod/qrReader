@@ -27,7 +27,9 @@ import com.journeyapps.barcodescanner.CompoundBarcodeView;
 import java.util.List;
 
 import qr.hiram.qreader.R;
+import qr.hiram.qreader.activities.DetailsActivity;
 import qr.hiram.qreader.activities.NewArticleActivity;
+import qr.hiram.qreader.models.Article;
 
 public class ScannerFragment extends Fragment {
 
@@ -54,12 +56,26 @@ public class ScannerFragment extends Fragment {
         public void barcodeResult(final BarcodeResult result) {
             if(result.getText() != null) {
                 barcodeView.setStatusText(result.getText());
-                Query query = QRS.child("Articles").orderByChild("id").equalTo(result.getText());
+                Query query = QRS.child("Articles").orderByChild("id").equalTo(result.getText()).limitToFirst(1);
                 query.addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                        Article article = new Article();
                         if (dataSnapshot.exists()) {
-                            Toast.makeText(getContext(), "Existe", Toast.LENGTH_SHORT).show();
+                            for(DataSnapshot post: dataSnapshot.getChildren()){
+                                article = post.getValue(Article.class);
+                            }
+                            if(article != null) {
+                                Intent intent = new Intent(getContext(), DetailsActivity.class);
+                                Bundle bundle = new Bundle();
+                                bundle.putString("ID", result.getText());
+                                bundle.putString("DSCR", article.getDescription());
+                                bundle.putString("COLOR", article.getColor());
+                                bundle.putFloat("PRICE", article.getPrice());
+                                intent.putExtras(bundle);
+                                startActivity(intent);
+                                //Toast.makeText(getContext(), article.getColor(), Toast.LENGTH_SHORT).show();
+                            }
                         } else {
                             Intent intent = new Intent(getContext(), NewArticleActivity.class);
                             Bundle bundle = new Bundle();
